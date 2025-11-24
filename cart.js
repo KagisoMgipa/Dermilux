@@ -4,10 +4,13 @@ const cartItemsContainer = document.querySelector(".cart-items");
 const subtotalEl = document.getElementById("subtotal");
 const shippingEl = document.getElementById("shipping");
 const totalEl = document.getElementById("total");
+const checkoutBtn = document.querySelector(".checkout-btn");
 
 const SHIPPING_COST = 60;
 
+// -------------------------------
 // Render the cart items
+// -------------------------------
 function renderCart() {
   cartItemsContainer.innerHTML = "";
 
@@ -38,7 +41,6 @@ function renderCart() {
     `;
     cartItemsContainer.appendChild(cartItem);
 
-    // Add event listeners for increase, decrease, remove
     const decreaseBtn = cartItem.querySelector(".decrease");
     const increaseBtn = cartItem.querySelector(".increase");
     const qtyEl = cartItem.querySelector(".qty");
@@ -71,12 +73,16 @@ function renderCart() {
   updateCartCount();
 }
 
+// -------------------------------
 // Update cart in localStorage
+// -------------------------------
 function updateCartStorage() {
   localStorage.setItem("cart", JSON.stringify(cart));
 }
 
+// -------------------------------
 // Update totals
+// -------------------------------
 function updateTotals() {
   let subtotal = cart.reduce((sum, item) => sum + Number(item.price) * item.qty, 0);
   subtotalEl.textContent = `R${subtotal}`;
@@ -85,13 +91,40 @@ function updateTotals() {
   totalEl.textContent = `R${subtotal + shipping}`;
 }
 
+// -------------------------------
 // Update cart counter in header
+// -------------------------------
 function updateCartCount() {
   const counter = document.getElementById("cartCount");
   if (counter) {
     const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
     counter.textContent = totalQty;
   }
+}
+
+// -------------------------------
+// Checkout button functionality
+// -------------------------------
+if (checkoutBtn) {
+  checkoutBtn.addEventListener("click", () => {
+    if (cart.length === 0) {
+      alert("Your cart is empty. Add products before proceeding to checkout.");
+      return;
+    }
+
+    // Save cart and totals to sessionStorage for checkout page
+    const subtotal = cart.reduce((sum, item) => sum + Number(item.price) * item.qty, 0);
+    const shipping = cart.length > 0 ? SHIPPING_COST : 0;
+    const total = subtotal + shipping;
+
+    sessionStorage.setItem("checkoutCart", JSON.stringify(cart));
+    sessionStorage.setItem("checkoutSubtotal", subtotal);
+    sessionStorage.setItem("checkoutShipping", shipping);
+    sessionStorage.setItem("checkoutTotal", total);
+
+    // Redirect to checkout page
+    window.location.href = "checkout.html";
+  });
 }
 
 // Initial render

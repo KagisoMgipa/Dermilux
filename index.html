@@ -4,15 +4,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dermilux Skincare</title>
-  <!-- Font Awesome for social icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  <link rel="stylesheet" href="styles.css">
-  
+
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome for social icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <!-- HEADER + LOGO -->
+  <!-- FLOATING CART BUTTON -->
+  <a href="cart.html" class="floating-cart-btn">
+    🛒 Cart (<span id="cartCount">0</span>)
+  </a>
+
+  <!-- HEADER -->
   <header class="header" id="header">
     <img src="images/76a3865e-6ec3-4ebc-91dc-a82bc46e2604.jpg" alt="Dermilux Logo" class="logo">
     <nav class="nav">
@@ -26,10 +35,10 @@
   <!-- HERO SECTION -->
   <section class="hero">
     <div class="hero-content" data-aos="fade-up">
-        <div class="sparkle" style="top: 20%; left: 30%; animation-delay: 0s;"></div>
-        <div class="sparkle" style="top: 50%; left: 60%; animation-delay: 1s;"></div>
-        <div class="sparkle" style="top: 55%; left: 40%; animation-delay: 2s;"></div>
-        <div class="sparkle" style="top: 35%; left: 55%; animation-delay: 1.5s;"></div>
+      <div class="sparkle" style="top: 20%; left: 30%; animation-delay: 0s;"></div>
+      <div class="sparkle" style="top: 50%; left: 60%; animation-delay: 1s;"></div>
+      <div class="sparkle" style="top: 55%; left: 40%; animation-delay: 2s;"></div>
+      <div class="sparkle" style="top: 35%; left: 55%; animation-delay: 1.5s;"></div>
 
       <h1>Glow Naturally with Dermilux</h1>
       <p>Brighten, nourish, and rejuvenate your skin with organic turmeric skincare.</p>
@@ -37,7 +46,7 @@
     </div>
   </section>
 
-  <!-- PRODUCT GRID SECTION -->
+  <!-- PRODUCTS SECTION -->
   <section id="products" class="products-section">
     <div class="float-shape shape1"></div>
     <div class="float-shape shape2"></div>
@@ -95,12 +104,31 @@
   </section>
 
   <!-- FOOTER -->
-<footer class="footer" id="contact">
-  <p>© 2025 Dermilux Skincare. All rights reserved.</p>
-  <p>Email: dermilux@gmail.com | WhatsApp: +27 71 481 3411</p>
+  <footer class="footer" id="contact">
+    <p>© 2025 Dermilux Skincare. All rights reserved.</p>
+    <p>Email: dermilux@gmail.com | WhatsApp: +27 71 481 3411</p>
 
-  <!-- Social Icons -->
-  <div class="social-icons">
+    <!-- Social Icons -->
+    <div class="social-icons">
+      <a href="https://wa.me/27714813411" target="_blank" aria-label="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+      </a>
+      <a href="https://www.facebook.com/yourpage" target="_blank" aria-label="Facebook">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="https://www.instagram.com/yourpage" target="_blank" aria-label="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+    </div>
+
+    <!-- QR code -->
+    <div class="qr-code">
+      <img src="images/dermilux-qr.png" alt="Scan to visit Dermilux website">
+    </div>
+  </footer>
+
+  <!-- FLOATING SOCIAL BUTTONS -->
+  <div class="floating-social">
     <a href="https://wa.me/27714813411" target="_blank" aria-label="WhatsApp">
       <i class="fab fa-whatsapp"></i>
     </a>
@@ -112,60 +140,17 @@
     </a>
   </div>
 
-  <!-- QR code placeholder -->
-  <div class="qr-code">
-    <img src="images/dermilux-qr.png" alt="Scan to visit Dermilux website">
-  </div>
-</footer>
+  <!-- SCRIPTS -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000, once: true, offset: 100 });
 
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle("scrolled", window.scrollY > 50);
+    });
+  </script>
 
-  <!-- AOS Animation Library -->
-<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-<script>
-  AOS.init({ duration: 1000, once: true, offset: 100 });
-
-  const header = document.getElementById('header');
-  window.addEventListener('scroll', () => {
-    header.classList.toggle("scrolled", window.scrollY > 50);
-  });
-</script>
-
-<!-- Main JavaScript -->
-<script src="script.js"></script>
-
-<!-- Cart link -->
-<a href="cart.html" class="cart-link">
-  Cart (<span id="cartCount">0</span>)
-</a>
-
-
-<!-- Floating Social Buttons -->
-<div class="floating-social">
-  <a href="https://wa.me/27714813411" target="_blank" aria-label="WhatsApp">
-    <i class="fab fa-whatsapp"></i>
-  </a>
-  <a href="https://www.facebook.com/yourpage" target="_blank" aria-label="Facebook">
-    <i class="fab fa-facebook-f"></i>
-  </a>
-  <a href="https://www.instagram.com/yourpage" target="_blank" aria-label="Instagram">
-    <i class="fab fa-instagram"></i>
-  </a>
-</div>
-
-<script src="script.js"></script>
-  <a href="#" class="cart-link">
-  Cart (<span id="cartCount">0</span>)
-  </a>
-
-  <a href="cart.html" class="cart-link">
-  Cart (<span id="cartCount">0</span>)
-</a>
-
-
-  <a href="cart.html" class="cart-link">Cart (<span id="cartCount">0</span>)</a>
-
-
-
-
+  <script src="script.js"></script>
 </body>
 </html>

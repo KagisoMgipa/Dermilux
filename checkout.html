@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout – Peach Payments</title>
+  <link rel="stylesheet" href="checkout.css" />
+</head>
+<body>
+  <h1>Checkout</h1>
+
+  <!-- Delivery Form -->
+  <form id="deliveryForm">
+    <label>Name</label><input type="text" id="name" required /><br/>
+    <label>Email</label><input type="email" id="email" required /><br/>
+    <label>Phone</label><input type="text" id="phone" required /><br/>
+    <label>Address</label><input type="text" id="address" required /><br/>
+    <button type="button" id="save-delivery">Save Delivery Info</button>
+  </form>
+
+  <!-- Cart Summary -->
+  <div id="cart-summary">
+    <h2>Cart Summary</h2>
+    <ul id="cart-items"></ul>
+    <p>Total: <strong id="cart-total">0.00 ZAR</strong></p>
+  </div>
+
+  <!-- Peach Checkout -->
+  <div id="checkout-container"></div>
+  <button id="pay-button">Pay Now</button>
+
+  <script src="https://js.peachpayments.com/checkout-v2/checkout.js"></script>
+  <script src="checkout.js"></script>
+</body>
+</html>

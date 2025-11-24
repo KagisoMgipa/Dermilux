@@ -1,73 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Shopping Cart - Dermilux</title>
-  <link rel="stylesheet" href="styles.css">
+  <!--<link rel="stylesheet" href="styles.css" /> -->
+  <link rel="stylesheet" href="cart.css">
+
 </head>
 <body>
-
-  <header class="cart-header">
-    <h1>Your Cart</h1>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a href="index.html" class="floating-logo-btn">Dermilux</a>
+      <a href="cart.html" class="floating-cart-btn">
+  🛒 Cart (<span id="cartCount">0</span>)
+</a>
+    </div>
   </header>
 
   <main class="cart-container">
+    <!-- LEFT: cart items -->
+    <section class="cart-items-wrap">
+      <h1 class="page-title">Shopping Cart</h1>
 
-    <!-- Cart Items Section -->
-    <div class="cart-items">
-
-      <!-- SINGLE CART ITEM -->
-      <div class="cart-item">
-        <img src="images/product1.png" class="cart-item-img" alt="">
-        
-        <div class="cart-item-details">
-          <h3>Dermilux Brightening Serum</h3>
-          <p class="price">R299</p>
-
-          <div class="qty-controls">
-            <button class="qty-btn decrease">-</button>
-            <span class="qty">1</span>
-            <button class="qty-btn increase">+</button>
-          </div>
-
-          <button class="remove-item">Remove</button>
-        </div>
+      <div class="cart-items">
+        <!-- cart.js will render .cart-item blocks here -->
       </div>
 
-      <!-- Duplicate this block for more products -->
-      
-    </div>
+      <!-- When cart empty, cart.js will show "Your cart is empty." -->
+    </section>
 
-    <!-- Cart Summary Section -->
-    <aside class="cart-summary">
-      <h2>Order Summary</h2>
+    
+<!-- RIGHT: order summary (gold highlight) -->
+<aside class="cart-summary">
+  <h2>Order Summary</h2>
 
-      <div class="summary-line">
-        <span>Subtotal</span>
-        <span id="subtotal">R299</span>
-      </div>
+  <div class="summary-line">
+    <span>Subtotal</span>
+    <span id="subtotal">R0</span>
+  </div>
 
-      <div class="summary-line">
-        <span>Shipping</span>
-        <span id="shipping">R60</span>
-      </div>
+  <div class="summary-line">
+    <span>Shipping</span>
+    <span id="shipping">R0</span>
+  </div>
 
-      <div class="summary-total">
-        <span>Total</span>
-        <span id="total">R359</span>
-      </div>
+  <div class="summary-total">
+    <span>Total</span>
+    <span id="total">R0</span>
+  </div>
 
-      <button class="checkout-btn">Proceed to Checkout</button>
-    </aside>
+  <!-- Proceed to checkout button -->
+  <button id="checkoutBtn" class="checkout-btn">Proceed to Checkout</button>
+</aside>
 
   </main>
 
-  <a href="cart.html" class="cart-link">
-  Cart (<span id="cartCount">0</span>)
-</a>
-
-
+  <!-- include your existing cart.js (make sure it uses the same class/IDs) -->
   <script src="cart.js"></script>
+  
 </body>
 </html>
