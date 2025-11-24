@@ -7,6 +7,7 @@
   <!-- Font Awesome for social icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <link rel="stylesheet" href="styles.css">
+  
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -119,25 +120,24 @@
 
 
   <!-- AOS Animation Library -->
-  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-  <script>
-    AOS.init({
-      duration: 1000,
-      once: true,
-      offset: 100
-    });
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({ duration: 1000, once: true, offset: 100 });
 
-    // Header scroll effect
-    const header = document.getElementById('header');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
-    });
-  </script>
+  const header = document.getElementById('header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle("scrolled", window.scrollY > 50);
+  });
+</script>
+
+<!-- Main JavaScript -->
+<script src="script.js"></script>
+
+<!-- Cart link -->
+<a href="cart.html" class="cart-link">
+  Cart (<span id="cartCount">0</span>)
+</a>
+
 
 <!-- Floating Social Buttons -->
 <div class="floating-social">
@@ -151,6 +151,21 @@
     <i class="fab fa-instagram"></i>
   </a>
 </div>
+
+<script src="script.js"></script>
+  <a href="#" class="cart-link">
+  Cart (<span id="cartCount">0</span>)
+  </a>
+
+  <a href="cart.html" class="cart-link">
+  Cart (<span id="cartCount">0</span>)
+</a>
+
+
+  <a href="cart.html" class="cart-link">Cart (<span id="cartCount">0</span>)</a>
+
+
+
 
 </body>
 </html>
