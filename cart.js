@@ -1,5 +1,10 @@
+// -------------------------------
+// Cart.js (Updated for PayFast integration)
+// -------------------------------
+
 // Load cart from localStorage
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
 const cartItemsContainer = document.querySelector(".cart-items");
 const subtotalEl = document.getElementById("subtotal");
 const shippingEl = document.getElementById("shipping");
@@ -16,9 +21,7 @@ function renderCart() {
 
   if (cart.length === 0) {
     cartItemsContainer.innerHTML = "<p>Your cart is empty.</p>";
-    subtotalEl.textContent = "R0";
-    totalEl.textContent = "R0";
-    shippingEl.textContent = "R0";
+    updateTotals();
     updateCartCount();
     return;
   }
@@ -30,7 +33,7 @@ function renderCart() {
       <img src="${item.image}" class="cart-item-img" alt="${item.name}">
       <div class="cart-item-details">
         <h3>${item.name}</h3>
-        <p class="price">R${item.price}</p>
+        <p class="price">R${Number(item.price).toFixed(2)}</p>
         <div class="qty-controls">
           <button class="qty-btn decrease">-</button>
           <span class="qty">${item.qty}</span>
@@ -41,6 +44,7 @@ function renderCart() {
     `;
     cartItemsContainer.appendChild(cartItem);
 
+    // Quantity buttons
     const decreaseBtn = cartItem.querySelector(".decrease");
     const increaseBtn = cartItem.querySelector(".increase");
     const qtyEl = cartItem.querySelector(".qty");
@@ -84,11 +88,19 @@ function updateCartStorage() {
 // Update totals
 // -------------------------------
 function updateTotals() {
-  let subtotal = cart.reduce((sum, item) => sum + Number(item.price) * item.qty, 0);
-  subtotalEl.textContent = `R${subtotal}`;
+  const subtotal = cart.reduce((sum, item) => sum + Number(item.price) * Number(item.qty), 0);
   const shipping = cart.length > 0 ? SHIPPING_COST : 0;
-  shippingEl.textContent = `R${shipping}`;
-  totalEl.textContent = `R${subtotal + shipping}`;
+  const total = subtotal + shipping;
+
+  subtotalEl.textContent = `R${subtotal.toFixed(2)}`;
+  shippingEl.textContent = `R${shipping.toFixed(2)}`;
+  totalEl.textContent = `R${total.toFixed(2)}`;
+
+  // Save totals to sessionStorage for checkout
+  sessionStorage.setItem("checkoutCart", JSON.stringify(cart));
+  sessionStorage.setItem("checkoutSubtotal", subtotal.toFixed(2));
+  sessionStorage.setItem("checkoutShipping", shipping.toFixed(2));
+  sessionStorage.setItem("checkoutTotal", total.toFixed(2));
 }
 
 // -------------------------------
@@ -111,16 +123,6 @@ if (checkoutBtn) {
       alert("Your cart is empty. Add products before proceeding to checkout.");
       return;
     }
-
-    // Save cart and totals to sessionStorage for checkout page
-    const subtotal = cart.reduce((sum, item) => sum + Number(item.price) * item.qty, 0);
-    const shipping = cart.length > 0 ? SHIPPING_COST : 0;
-    const total = subtotal + shipping;
-
-    sessionStorage.setItem("checkoutCart", JSON.stringify(cart));
-    sessionStorage.setItem("checkoutSubtotal", subtotal);
-    sessionStorage.setItem("checkoutShipping", shipping);
-    sessionStorage.setItem("checkoutTotal", total);
 
     // Redirect to checkout page
     window.location.href = "checkout.html";

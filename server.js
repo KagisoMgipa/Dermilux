@@ -1,39 +1,39 @@
-const body = {
-  entityId: PEACH_ENTITY_ID,
-  amount: amount.toFixed(2).toString(),
-  currency: "ZAR",
-  paymentType: "DB",
-  customer: {
-    givenName: givenName,
-    surname: surname,
-    email: customer.email || "",
-  },
-  merchantTransactionId: `txn_${Date.now()}`,
-};
+const express = require("express");
+const app = express();
+app.use(express.json());
 
-const query = new URLSearchParams(body).toString();
-const auth = Buffer.from(`${PEACH_ENTITY_ID}:${PEACH_SECRET}`).toString("base64");
+// Shipping cost
+const SHIPPING_COST = 60;
 
-try {
-  const peachResponse = await fetch(`${PEACH_API_BASE}/v1/checkouts`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-      "Authorization": `Basic ${auth}`
-    },
-    body: query
-  });
+app.post("/create-payfast-payment", (req, res) => {
+  const { customer, items } = req.body;
 
-  const data = await peachResponse.json();
-  console.log("Peach response:", data);  // <-- debug
-
-  if (data && data.id) {
-    res.json({ checkoutId: data.id });
-  } else {
-    console.error("Peach checkout error:", data);
-    res.status(500).json({ error: "Could not create Peach checkout" });
+  if (!customer || !items || !Array.isArray(items) || items.length === 0) {
+    return res.status(400).json({ error: "Invalid order data" });
   }
-} catch (err) {
-  console.error(err);
-  res.status(500).json({ error: "Server error" });
-}
+
+  // Recalculate subtotal and total on server
+  const subtotal = items.reduce((sum, item) => sum + Number(item.price) * Number(item.qty), 0);
+  const total = subtotal + SHIPPING_COST;
+
+  // Prepare PayFast data
+  const names = customer.name.trim().split(" ");
+  const payfastData = {
+    merchant_id: "26831331",
+    merchant_key: "tg6ksmmtyqtxa",
+    amount: total.toFixed(2), // 2 decimals
+    item_name: items.map(i => i.name).join(", "), // all items in one string
+    return_url: "https://yourdomain.com/success",
+    cancel_url: "https://yourdomain.com/cancel",
+    email_address: customer.email,
+    name_first: names.shift(),
+    name_last: names.join(" "),
+  };
+
+  const queryString = new URLSearchParams(payfastData).toString();
+  const redirectUrl = `https://www.payfast.co.za/eng/process?${queryString}`;
+
+  res.json({ redirectUrl });
+});
+
+app.listen(3000, () => console.log("Server running on port 3000"));

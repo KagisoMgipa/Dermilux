@@ -1,5 +1,5 @@
 // -------------------------------
-// Checkout.js
+// Checkout.js (PayFast Integration)
 // -------------------------------
 
 // Load delivery info if saved
@@ -9,10 +9,10 @@ const saveDeliveryBtn = document.getElementById("save-delivery");
 // Save delivery info
 saveDeliveryBtn.addEventListener("click", () => {
   const info = {
-    name: deliveryForm.name.value,
-    email: deliveryForm.email.value,
-    phone: deliveryForm.phone.value,
-    address: deliveryForm.address.value,
+    name: deliveryForm.name.value.trim(),
+    email: deliveryForm.email.value.trim(),
+    phone: deliveryForm.phone.value.trim(),
+    address: deliveryForm.address.value.trim(),
   };
 
   if (!info.name || !info.email || !info.phone || !info.address) {
@@ -28,9 +28,6 @@ saveDeliveryBtn.addEventListener("click", () => {
 // Load cart from sessionStorage
 // -------------------------------
 let cart = JSON.parse(sessionStorage.getItem("checkoutCart") || "[]");
-const subtotal = Number(sessionStorage.getItem("checkoutSubtotal") || 0);
-const shipping = Number(sessionStorage.getItem("checkoutShipping") || 0);
-const total = Number(sessionStorage.getItem("checkoutTotal") || 0);
 
 const cartItemsContainer = document.getElementById("cart-items");
 const cartTotalEl = document.getElementById("cart-total");
@@ -45,19 +42,26 @@ function renderCart() {
     return;
   }
 
+  let total = 0;
   cart.forEach(item => {
     const li = document.createElement("li");
     li.textContent = `${item.name} x ${item.qty} - R${(item.price * item.qty).toFixed(2)}`;
     cartItemsContainer.appendChild(li);
+
+    total += Number(item.price) * Number(item.qty);
   });
 
-  cartTotalEl.textContent = (total).toFixed(2) + " ZAR";
+  // Add shipping
+  const SHIPPING_COST = 60;
+  total += SHIPPING_COST;
+
+  cartTotalEl.textContent = total.toFixed(2) + " ZAR";
 }
 
 renderCart();
 
 // -------------------------------
-// Pay Button
+// PayFast Payment Button
 // -------------------------------
 const payButton = document.getElementById("pay-button");
 
@@ -75,57 +79,28 @@ payButton.addEventListener("click", async () => {
   }
 
   try {
-    // Peach API expects amount as string with 2 decimals
-    const amount = total.toFixed(2);
-
-    const resp = await fetch("/create-peach-checkout", {
+    // Send order + customer info to backend
+    const response = await fetch("/create-payfast-payment", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        amount: amount,
-        customer: saved,
-        cart: cart,
+        items: cart,
+        customer: saved
       }),
     });
 
-    const { checkoutId, error } = await resp.json();
+    const data = await response.json();
 
-    if (error) {
-      alert("Error creating checkout: " + error);
+    if (!data.redirectUrl) {
+      alert("Error starting payment. Please try again.");
       return;
     }
 
-    const peachCheckout = new Peach.Checkout({
-      container: "checkout-container",
-      checkoutId: checkoutId
-    });
+    // Redirect customer to PayFast for card payment
+    window.location.href = data.redirectUrl;
 
-    peachCheckout.on("COMPLETE", (data) => {
-      console.log("Payment complete:", data);
-      alert("Payment successful! Thank you for your order.");
-
-      // Clear cart after successful payment
-      localStorage.removeItem("cart");
-      sessionStorage.removeItem("checkoutCart");
-      sessionStorage.removeItem("checkoutSubtotal");
-      sessionStorage.removeItem("checkoutShipping");
-      sessionStorage.removeItem("checkoutTotal");
-
-      window.location.href = "/thank-you";
-    });
-
-    peachCheckout.on("CANCEL", () => {
-      alert("Payment was cancelled.");
-    });
-
-    peachCheckout.on("ERROR", (err) => {
-      console.error("Payment error:", err);
-      alert("Payment error occurred. Check console for details.");
-    });
-
-    peachCheckout.open();
   } catch (err) {
-    console.error("Checkout error:", err);
-    alert("Failed to initiate payment. Check console.");
+    console.error("PayFast Checkout error:", err);
+    alert("Failed to start payment. Check console for details.");
   }
 });

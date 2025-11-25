@@ -3,33 +3,64 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Checkout – Peach Payments</title>
+  <title>Checkout – Dermilux</title>
+
+  <!-- Your modern checkout styling -->
   <link rel="stylesheet" href="checkout.css" />
 </head>
 <body>
-  <h1>Checkout</h1>
 
-  <!-- Delivery Form -->
-  <form id="deliveryForm">
-    <label>Name</label><input type="text" id="name" required /><br/>
-    <label>Email</label><input type="email" id="email" required /><br/>
-    <label>Phone</label><input type="text" id="phone" required /><br/>
-    <label>Address</label><input type="text" id="address" required /><br/>
-    <button type="button" id="save-delivery">Save Delivery Info</button>
-  </form>
+  <div class="checkout-container">
 
-  <!-- Cart Summary -->
-  <div id="cart-summary">
-    <h2>Cart Summary</h2>
-    <ul id="cart-items"></ul>
-    <p>Total: <strong id="cart-total">0.00 ZAR</strong></p>
+    <h1 class="page-title">Checkout</h1>
+
+    <!-- LEFT SIDE: Delivery info -->
+    <section class="delivery-section">
+      <h2>Delivery Information</h2>
+
+      <form id="deliveryForm" class="delivery-form">
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" name="name" id="name" required />
+        </div>
+
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" name="email" id="email" required />
+        </div>
+
+        <div class="form-group">
+          <label>Phone</label>
+          <input type="text" name="phone" id="phone" required />
+        </div>
+
+        <div class="form-group">
+          <label>Address</label>
+          <input type="text" name="address" id="address" required />
+        </div>
+
+        <button type="button" id="save-delivery" class="btn primary-btn">
+          Save Delivery Info
+        </button>
+      </form>
+    </section>
+
+    <!-- RIGHT SIDE: Cart Summary + Pay Button -->
+    <section class="summary-section">
+      <h2>Order Summary</h2>
+
+      <ul id="cart-items" class="cart-summary-list"></ul>
+
+      <p class="total-line">
+        Total: <strong id="cart-total">0.00 ZAR</strong>
+      </p>
+
+      <button id="pay-button" class="btn pay-btn">Pay Now</button>
+    </section>
+
   </div>
 
-  <!-- Peach Checkout -->
-  <div id="checkout-container"></div>
-  <button id="pay-button">Pay Now</button>
-
-  <script src="https://js.peachpayments.com/checkout-v2/checkout.js"></script>
+  <!-- No more Peach scripts! -->
   <script src="checkout.js"></script>
 </body>
 </html>
