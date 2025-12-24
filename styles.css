@@ -471,3 +471,100 @@ body {
     padding: 40px 20px;
   }
 }
+
+/* ===============================
+   THEME VARIABLES
+================================ */
+
+:root {
+  --bg: #ffffff;
+  --text: #1f2933;
+  --primary: #c18f2c;
+  --secondary: #f9f6f1;
+  --card: #ffffff;
+  --border: #e5e7eb;
+}
+
+body.dark {
+  --bg: #0f172a;
+  --text: #e5e7eb;
+  --primary: #facc15;
+  --secondary: #020617;
+  --card: #020617;
+  --border: #1e293b;
+}
+
+.dark-toggle {
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+  margin-left: 1rem;
+  color: var(--text);
+  transition: transform 0.3s ease;
+}
+
+.dark-toggle:hover {
+  transform: rotate(20deg);
+}
+
+.header {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 1rem 2rem;
+}
+
+/* Left */
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+/* Center */
+.header-center {
+  display: flex;
+  justify-content: center;
+}
+
+/* Right */
+.header-right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.dark-toggle {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.5rem 0.75rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: var(--text);
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.dark-toggle:hover {
+  transform: scale(1.1) rotate(15deg);
+}
+
+:root {
+  --bg: #ffffff;
+  --text: #111111;
+  --card: #f7f7f7;
+  --border: #e5e5e5;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* 🌙 DARK MODE */
+body.dark {
+  --bg: #0f0f0f;
+  --text: #f1f1f1;
+  --card: #1c1c1c;
+  --border: #333333;
+}

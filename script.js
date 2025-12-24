@@ -104,3 +104,4 @@ function bounceCart(cartBtnEl) {
     cartBtnEl.style.transform = "scale(1)";
   }, 200);
 }
+

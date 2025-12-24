@@ -1,195 +1,198 @@
-:root {
-  --accent: #f4c542; /* gold/yellow accent to match Dermilux */
-  --card-bg: #ffffff;
-  --muted: #666;
-  --shadow: 0 6px 18px rgba(0,0,0,0.08);
-  --radius: 10px;
+/* ================================
+   GLOBAL RESET
+================================ */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-/* Page layout */
-.cart-container {
-  max-width: 1200px;
-  margin: 28px auto;
-  padding: 0 18px;
-  display: grid;
-  grid-template-columns: 1fr 360px;
-  gap: 28px;
-  align-items: start;
-}
-
-/* Left column */
-.cart-items-wrap .page-title {
-  font-size: 24px;
-  margin: 0 0 18px;
+body {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: #fafafa;
   color: #222;
 }
 
-/* Product card */
-.cart-item {
-  display: flex;
-  gap: 18px;
-  align-items: flex-start;
-  background: var(--card-bg);
-  padding: 18px;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  margin-bottom: 18px;
+/* ================================
+   HEADER
+================================ */
+.site-header {
+  background: #111;
+  padding: 16px 24px;
 }
 
-.cart-item-img {
-  width: 110px;
-  height: 110px;
+.site-header-inner {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.floating-logo-btn {
+  color: #fff;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.floating-cart-btn {
+  color: #fff;
+  text-decoration: none;
+  font-size: 15px;
+}
+
+/* ================================
+   PAGE LAYOUT
+================================ */
+.cart-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 30px;
+}
+
+/* ================================
+   CART ITEMS
+================================ */
+.cart-items-wrap {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+.page-title {
+  font-size: 26px;
+  margin-bottom: 20px;
+}
+
+.cart-items p {
+  color: #666;
+}
+
+/* Individual cart item */
+.cart-item {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.cart-item:last-child {
+  border-bottom: none;
+}
+
+.cart-item img {
+  width: 90px;
+  height: 90px;
   object-fit: cover;
   border-radius: 8px;
-  flex-shrink: 0;
 }
 
-.cart-item-details h3 {
-  margin: 0 0 6px 0;
-  font-size: 18px;
+.cart-item h4 {
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+.cart-item p {
   font-weight: 600;
-  color: #111;
-}
-
-.cart-item-details .price {
-  color: var(--muted);
   margin-bottom: 10px;
-  font-weight: 700;
 }
 
-/* qty + actions */
-.qty-controls {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 8px;
-}
-.qty-btn {
-  background: transparent;
-  border: 1px solid #ddd;
+/* Quantity + buttons */
+.cart-item button {
+  background: #111;
+  color: #fff;
+  border: none;
   padding: 6px 10px;
+  margin-right: 6px;
   border-radius: 6px;
   cursor: pointer;
-  font-weight: 700;
-}
-.qty {
-  min-width: 26px;
-  text-align: center;
-  font-weight: 700;
+  font-size: 14px;
 }
 
-/* Remove and move links */
-.remove-item {
-  background: transparent;
-  border: none;
-  color: #c23;
-  cursor: pointer;
-  margin-top: 6px;
-  font-weight: 700;
+.cart-item button:hover {
+  opacity: 0.85;
 }
 
-/* Right column: summary box (gold accent) */
+.cart-item span {
+  margin-right: 10px;
+  font-weight: 600;
+}
+
+.cart-item .remove {
+  background: #c62828;
+  margin-left: 6px;
+}
+
+/* ================================
+   ORDER SUMMARY
+================================ */
 .cart-summary {
-  background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.96));
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: var(--shadow);
-  position: sticky;
-  top: 22px;
-  border-top: 6px solid var(--accent);
+  background: #fff;
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  height: fit-content;
 }
 
 .cart-summary h2 {
-  margin: 0 0 12px 0;
-  font-size: 20px;
+  font-size: 22px;
+  margin-bottom: 20px;
 }
 
 .summary-line,
 .summary-total {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 12px;
-  font-weight: 600;
+  margin-bottom: 14px;
+  font-size: 15px;
 }
 
 .summary-total {
-  border-top: 1px solid #eee;
-  padding-top: 12px;
   font-size: 18px;
+  font-weight: bold;
+  padding-top: 12px;
+  border-top: 1px solid #eee;
 }
 
-#total {
-  color: #0a3b60; /* dark accent for total price contrast */
-  font-size: 20px;
-  font-weight: 800;
-}
-
-/* Checkout button uses gold accent */
+/* ================================
+   CHECKOUT BUTTON
+================================ */
 .checkout-btn {
-  display: block;
   width: 100%;
-  padding: 12px;
-  margin-top: 10px;
-  background: var(--accent);
+  background: #111;
+  color: #fff;
   border: none;
-  color: #072033;
-  border-radius: 8px;
+  padding: 14px;
+  margin-top: 18px;
   font-size: 16px;
-  font-weight: 800;
+  border-radius: 8px;
   cursor: pointer;
-  box-shadow: 0 6px 12px rgba(244,197,66,0.18);
 }
 
-/* Small screens: stack */
-@media (max-width: 880px) {
+.checkout-btn:hover {
+  background: #333;
+}
+
+/* ================================
+   RESPONSIVE
+================================ */
+@media (max-width: 900px) {
   .cart-container {
     grid-template-columns: 1fr;
   }
-  .cart-summary {
-    position: relative;
-    top: 0;
+
+  .cart-item {
+    grid-template-columns: 70px 1fr;
+  }
+
+  .cart-item img {
+    width: 70px;
+    height: 70px;
   }
 }
-
-/* Floating Cart Button */
-.floating-cart-btn {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background: #f4c542; /* gold accent */
-  color: #072033;
-  padding: 12px 18px;
-  border-radius: 50px;
-  font-weight: 700;
-  text-decoration: none;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
-  z-index: 9999;
-  transition: 0.3s ease;
-}
-
-.floating-cart-btn:hover {
-  background: #e0b238;
-  transform: translateY(-3px);
-}
-
-/* Floating Left Logo Button */
-.floating-logo-btn {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  background: #f4c542; /* gold accent */
-  color: #072033;
-  padding: 12px 20px;
-  border-radius: 50px;
-  font-weight: 800;
-  text-decoration: none;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
-  z-index: 9999;
-  transition: 0.3s ease;
-}
-
-.floating-logo-btn:hover {
-  background: #e0b238;
-  transform: translateY(-3px);
-}
-
