@@ -275,3 +275,41 @@ body {
   border-color: #c9a24d;
   box-shadow: 0 0 0 2px rgba(201,162,77,0.2);
 }
+
+/* =========================
+   MOBILE RESPONSIVE FIX
+========================= */
+@media (max-width: 600px) {
+  body {
+    padding: 20px 10px;
+  }
+
+  .checkout-container {
+    max-width: 100%;
+    padding: 0 10px;
+  }
+
+  .delivery-section,
+  .summary-section {
+    padding: 20px;
+  }
+
+  .delivery-grid {
+    grid-template-columns: 1fr; /* stack inputs vertically */
+    gap: 14px;
+  }
+
+  .form-group.full {
+    grid-column: span 1; /* full width on mobile */
+  }
+
+  .primary-btn,
+  .pay-btn {
+    font-size: 1rem;
+    padding: 14px;
+  }
+
+  .page-title {
+    font-size: 1.6rem;
+  }
+}

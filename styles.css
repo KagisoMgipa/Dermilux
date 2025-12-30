@@ -84,7 +84,7 @@ body {
   overflow: hidden;
   color: #fff;
   background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
-              url("images/5503f53b-1216-481e-bd14-f6e468f77045.jpg") center/cover no-repeat;
+              url("images/38ec2add-a0c9-4b99-87cd-3e60af50df4a.jpg") center/cover no-repeat;
 }
 .hero-content h1 {
   font-size: 3.5rem;
@@ -568,3 +568,17 @@ body.dark {
   --card: #1c1c1c;
   --border: #333333;
 }
+
+@media (max-width: 768px) {
+  .floating-cart-btn {
+    padding: 6px 2px;
+    font-size: 0.6rem;
+    top: 10px; /* slightly lower */
+    right: 10px; /* slightly inward */
+  }
+}
+
+.header {
+  z-index: 1000; /* less than 9999 of cart */
+}
+
