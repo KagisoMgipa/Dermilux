@@ -30,52 +30,29 @@ cart.forEach(item => {
 cartTotalEl.textContent = `${Number(total).toFixed(2)} ZAR`;
 
 // -------------------------------
-// PAY BUTTON HANDLER
+// PAYFAST FORM HANDLER
 // -------------------------------
-const payBtn = document.getElementById("pay-button");
+const payfastForm = document.getElementById("payfastForm");
 
-payBtn.addEventListener("click", async () => {
-  const customer = {
-    name: document.getElementById("name").value.trim(),
-    email: document.getElementById("email").value.trim(),
-    phone: document.getElementById("phone").value.trim(),
-    address: document.getElementById("address").value.trim()
-  };
+payfastForm.addEventListener("submit", (e) => {
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const address = document.getElementById("address").value.trim();
 
-  if (!customer.name || !customer.email || !customer.address) {
+  if (!name || !email || !address) {
+    e.preventDefault();
     alert("Please fill in all delivery details.");
     return;
   }
 
-  // Save delivery info (optional future use)
-  localStorage.setItem("deliveryInfo", JSON.stringify(customer));
+  // Inject PayFast required values
+  document.getElementById("pf_amount").value = Number(total).toFixed(2);
+  document.getElementById("pf_name").value = name;
+  document.getElementById("pf_email").value = email;
 
-  try {
-    payBtn.disabled = true;
-    payBtn.textContent = "Redirecting to PayFast...";
-
-    const res = await fetch("/api/payfast", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        amount: Number(total).toFixed(2),
-        customer
-      })
-    });
-
-    const data = await res.json();
-
-    if (!res.ok || !data.redirectUrl) {
-      throw new Error("PayFast initialization failed");
-    }
-
-    // ✅ Redirect to PayFast
-    window.location.href = data.redirectUrl;
-
-  } catch (err) {
-    console.error("PayFast error:", err);
-    alert("Failed to start payment. Please try again.");
-    payBtn.disabled = false;
-    payBtn.textContent = "Pay Now";
-  }
+  // Save delivery info (optional)
+  localStorage.setItem(
+    "deliveryInfo",
+    JSON.stringify({ name, email, address })
+  );
 });
