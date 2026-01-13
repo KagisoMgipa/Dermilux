@@ -196,3 +196,12 @@ body {
     height: 70px;
   }
 }
+
+.hero-content * {
+  pointer-events: auto; /* ensures elements can be interacted with */
+}
+
+.hero-btn {
+  position: relative;
+  z-index: 10; /* brings button above sparkles */
+}

@@ -50,41 +50,45 @@
     </p>
 
     <!-- PAYFAST FORM -->
-    <form
-      id="payfastForm"
-      action="https://payment.payfast.io/eng/process"
-      method="post"
-    >
-      <!-- REQUIRED -->
-      <input type="hidden" name="cmd" value="_paynow">
+<form
+  id="payfastForm"
+  action="https://payment.payfast.io/eng/process"
+  method="post"
+>
+  <!-- REQUIRED -->
+  <input type="hidden" name="cmd" value="_paynow">
 
-      <!-- ✅ CORRECT MERCHANT DETAILS -->
-      <input type="hidden" name="merchant_id" value="26831331">
-      <input type="hidden" name="merchant_key" value="tg6ksmmtyqtxa">
+  <!-- ✅ USE YOUR PAYFAST LOGIN EMAIL -->
+  <input
+    type="hidden"
+    name="receiver"
+    value="kagitony00@gmail.com"
+  />
 
-      <!-- DYNAMIC -->
-      <input type="hidden" name="amount" id="pf_amount">
-      <input type="hidden" name="item_name" value="Dermilux Order">
-      <input type="hidden" name="name_first" id="pf_name">
-      <input type="hidden" name="email_address" id="pf_email">
+  <!-- DYNAMIC -->
+  <input type="hidden" name="amount" id="pf_amount">
+  <input type="hidden" name="item_name" value="Dermilux Order">
+  <input type="hidden" name="name_first" id="pf_name">
+  <input type="hidden" name="email_address" id="pf_email">
 
-      <!-- OPTIONAL -->
-      <input type="hidden" name="currency" value="ZAR">
-      <input type="hidden" name="return_url" value="https://dermilux.co.za/success.html">
-      <input type="hidden" name="cancel_url" value="https://dermilux.co.za/cancel.html">
+  <!-- OPTIONAL BUT GOOD -->
+  <input type="hidden" name="currency" value="ZAR">
+  <input
+    type="hidden"
+    name="return_url"
+    value="https://dermilux.co.za/success.html"
+  >
+  <input
+    type="hidden"
+    name="cancel_url"
+    value="https://dermilux.co.za/cancel.html"
+  >
 
-      <div class="payfast-trust">
-        <img
-          src="https://my.payfast.io/images/buttons/PayNow/Light-Small-PayNow.png"
-          alt="Secure payment by PayFast"
-        />
-        <span>Secure payment powered by PayFast</span>
-      </div>
+  <button type="submit" class="btn pay-btn">
+    Pay Now
+  </button>
+</form>
 
-      <button type="submit" class="btn pay-btn">
-        Pay Now
-      </button>
-    </form>
 
   </section>
 </div>

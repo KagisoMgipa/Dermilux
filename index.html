@@ -34,7 +34,15 @@
   </div>
 
   <div class="header-right">
-    <nav class="nav">
+    <!-- HAMBURGER -->
+<button class="hamburger" id="hamburger" aria-label="Menu">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
+
+    <!-- NAVIGATION -->
+    <nav class="nav" id="navMenu">
       <a href="#">Home</a>
       <a href="#products">Products</a>
       <a href="#about">About</a>
@@ -43,19 +51,25 @@
   </div>
 </header>
 
-  <!-- HERO SECTION -->
-  <section class="hero">
-    <div class="hero-content" data-aos="fade-up">
-      <div class="sparkle" style="top: 20%; left: 30%; animation-delay: 0s;"></div>
-      <div class="sparkle" style="top: 50%; left: 60%; animation-delay: 1s;"></div>
-      <div class="sparkle" style="top: 55%; left: 40%; animation-delay: 2s;"></div>
-      <div class="sparkle" style="top: 35%; left: 55%; animation-delay: 1.5s;"></div>
 
-      <h1>Glow Naturally with Dermilux</h1>
-      <p>Brighten, nourish, and rejuvenate your skin with organic turmeric skincare.</p>
-      <a href="#products" class="hero-btn">Shop Now</a>
-    </div>
-  </section>
+  <!-- HERO SECTION -->
+<section class="hero">
+  <div class="hero-content" data-aos="fade-up">
+    <!-- Sparkles -->
+    <div class="sparkle" style="top: 20%; left: 30%; animation-delay: 0s;"></div>
+    <div class="sparkle" style="top: 50%; left: 60%; animation-delay: 1s;"></div>
+    <div class="sparkle" style="top: 55%; left: 40%; animation-delay: 2s;"></div>
+    <div class="sparkle" style="top: 35%; left: 55%; animation-delay: 1.5s;"></div>
+
+    <!-- Hero Text -->
+    <h1>Glow Naturally with Dermilux</h1>
+    <p>Brighten, nourish, and rejuvenate your skin with organic turmeric skincare.</p>
+    
+    <!-- CTA Button -->
+    <a href="#products" class="hero-btn">Shop Now</a>
+  </div>
+</section>
+
 
   <!-- PRODUCTS SECTION -->
   <section id="products" class="products-section">
@@ -105,14 +119,15 @@
   </section>
 
   <!-- ABOUT SECTION -->
-  <section id="about" class="about-section" data-aos="fade-up">
-    <h2 class="section-title">About Our Brand</h2>
-    <p>
-      Dermilux is dedicated to creating natural skincare solutions powered by turmeric,
-      honey, and high-quality botanicals. Our mission is to help you achieve glowing,
-      healthy, even-toned skin using safe and effective ingredients.
-    </p>
-  </section>
+<section id="about" class="about-section" data-aos="fade-up">
+  <h2 class="section-title">About Our Brand</h2>
+  <p>
+    Dermilux is dedicated to creating <span class="highlight">natural skincare solutions</span> powered by
+    <span class="highlight">turmeric, honey, and high-quality botanicals</span>. Our mission is to help you
+    achieve <span class="highlight">glowing, healthy, even-toned skin</span> using safe and effective ingredients.
+  </p>
+</section>
+
 
   <!-- FOOTER -->
   <footer class="footer" id="contact">
@@ -120,17 +135,17 @@
     <p>Email: dermilux@gmail.com | WhatsApp: +27 727997607</p>
 
     <!-- Social Icons -->
-    <div class="social-icons">
-      <a href="https://wa.me/27727997607" target="_blank" aria-label="WhatsApp">
-        <i class="fab fa-whatsapp"></i>
-      </a>
-      <a href="https://www.facebook.com/yourpage" target="_blank" aria-label="Facebook">
-        <i class="fab fa-facebook-f"></i>
-      </a>
-      <a href="https://www.instagram.com/yourpage" target="_blank" aria-label="Instagram">
-        <i class="fab fa-instagram"></i>
-      </a>
-    </div>
+   <div class="social-icons">
+    <a href="https://wa.me/27727997607" target="_blank" aria-label="WhatsApp">
+      <i class="fab fa-whatsapp"></i>
+    </a>
+    <a href="https://www.facebook.com/pebetsigospelartist" target="_blank" aria-label="Facebook">
+      <i class="fab fa-facebook-f"></i>
+    </a>
+    <a href="https://www.instagram.com/pebetsigospel?igsh=NTFlbHl2d3k4ejFq" target="_blank" aria-label="Instagram">
+      <i class="fab fa-instagram"></i>
+    </a>
+  </div>
 
     <!-- QR code -->
     <div class="qr-code">
@@ -143,10 +158,10 @@
     <a href="https://wa.me/27727997607" target="_blank" aria-label="WhatsApp">
       <i class="fab fa-whatsapp"></i>
     </a>
-    <a href="https://www.facebook.com/yourpage" target="_blank" aria-label="Facebook">
+    <a href="https://www.facebook.com/pebetsigospelartist" target="_blank" aria-label="Facebook">
       <i class="fab fa-facebook-f"></i>
     </a>
-    <a href="https://www.instagram.com/yourpage" target="_blank" aria-label="Instagram">
+    <a href="https://www.instagram.com/pebetsigospel?igsh=NTFlbHl2d3k4ejFq" target="_blank" aria-label="Instagram">
       <i class="fab fa-instagram"></i>
     </a>
   </div>
@@ -179,6 +194,135 @@
     toggle.textContent = isDark ? "☀️" : "🌙";
     localStorage.setItem("theme", isDark ? "dark" : "light");
   });
+</script>
+
+<script>
+const hamburger = document.getElementById("hamburger");
+const navMenu = document.getElementById("navMenu");
+const navLinks = navMenu.querySelectorAll("a");
+
+hamburger.addEventListener("click", () => {
+  navMenu.classList.toggle("show");
+  hamburger.classList.toggle("active");
+});
+
+// AUTO-CLOSE MENU WHEN LINK IS CLICKED
+navLinks.forEach(link => {
+  link.addEventListener("click", () => {
+    navMenu.classList.remove("show");
+    hamburger.classList.remove("active");
+  });
+});
+</script>
+
+<script>
+  // Select the hero button
+  const heroBtn = document.querySelector('.hero-btn');
+
+  heroBtn.addEventListener('click', function(e) {
+    e.preventDefault(); // prevent default jump
+
+    const target = document.querySelector('#products');
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  // =========================
+  // Animate highlighted words
+  // =========================
+  const highlights = document.querySelectorAll('.about-section .highlight');
+
+  if (highlights.length > 0) {
+    const highlightsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.3 });
+
+    highlights.forEach(el => highlightsObserver.observe(el));
+  }
+
+  // =========================
+  // Floating social icons hide on footer
+  // =========================
+  const floatingSocial = document.querySelector('.floating-social');
+  const footer = document.querySelector('.footer');
+
+  if (floatingSocial && footer) {
+    const footerObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        floatingSocial.style.opacity = entry.isIntersecting ? '0' : '1';
+        floatingSocial.style.pointerEvents = entry.isIntersecting ? 'none' : 'auto';
+      });
+    }, { threshold: 0.1 });
+
+    footerObserver.observe(footer);
+  }
+
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  // =========================
+  // Animate highlighted words
+  // =========================
+  const highlights = document.querySelectorAll('.about-section .highlight');
+
+  if (highlights.length > 0) {
+    const highlightsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.3 });
+
+    highlights.forEach(el => highlightsObserver.observe(el));
+  }
+
+  // =========================
+  // Animate footer icons and hide floating social icons
+  // =========================
+  const floatingSocial = document.querySelector('.floating-social');
+  const footerIcons = document.querySelectorAll('.footer .social-icons a');
+  const footer = document.querySelector('.footer');
+
+  if (footer) {
+    const footerObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // Footer visible → fade in footer icons
+          footerIcons.forEach(icon => icon.classList.add('visible'));
+          // Hide floating social icons
+          if (floatingSocial) {
+            floatingSocial.style.opacity = '0';
+            floatingSocial.style.pointerEvents = 'none';
+          }
+        } else {
+          // Footer not visible → hide footer icons
+          footerIcons.forEach(icon => icon.classList.remove('visible'));
+          // Show floating social icons
+          if (floatingSocial) {
+            floatingSocial.style.opacity = '1';
+            floatingSocial.style.pointerEvents = 'auto';
+          }
+        }
+      });
+    }, { threshold: 0.1 });
+
+    footerObserver.observe(footer);
+  }
+
+});
 </script>
 
 </body>

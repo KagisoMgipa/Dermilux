@@ -79,25 +79,39 @@ body {
   justify-content: center;
   text-align: center;
   padding: 20px;
-  animation: fadeIn 2s ease-in;
   position: relative;
   overflow: hidden;
   color: #fff;
   background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
               url("images/38ec2add-a0c9-4b99-87cd-3e60af50df4a.jpg") center/cover no-repeat;
+  animation: fadeIn 2s ease-in;
 }
+
+/* Hero Content */
+.hero-content {
+  position: relative;
+  z-index: 10; /* ensures text & button are above sparkles */
+  max-width: 600px;
+}
+
+/* Hero Text */
 .hero-content h1 {
-  font-size: 3.5rem;
+  font-size: 3rem;
   margin-bottom: 15px;
   line-height: 1.2;
   text-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 .hero-content p {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   margin-bottom: 25px;
 }
+
+/* Hero Button */
 .hero-btn {
   display: inline-block;
+  position: relative;
+  z-index: 10; /* ensures button above decorations */
+  pointer-events: auto; /* allows clicks */
   background: linear-gradient(45deg, #f9a8d4, #d46a6a);
   padding: 14px 28px;
   color: white;
@@ -112,6 +126,71 @@ body {
   transform: translateY(-3px);
   box-shadow: 0 10px 20px rgba(0,0,0,0.25);
 }
+
+/* Sparkles */
+.hero .sparkle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #fff;
+  opacity: 0.8;
+  animation: twinkle 3s infinite ease-in-out;
+  pointer-events: none; /* allow button clicks through sparkles */
+}
+
+/* Hero Pseudo-elements for extra decoration */
+.hero::before,
+.hero::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.3;
+  animation: float 12s linear infinite;
+  pointer-events: none; /* prevent blocking button */
+}
+.hero::before {
+  width: 120px;
+  height: 120px;
+  top: 10%;
+  left: 5%;
+  background: radial-gradient(circle, #f9a8d4, #d46a6a);
+}
+.hero::after {
+  width: 200px;
+  height: 200px;
+  bottom: 15%;
+  right: 10%;
+  background: radial-gradient(circle, #ffd6d6, #f9a8d4);
+  animation-duration: 18s;
+}
+
+/* ==========================
+   ANIMATIONS
+========================== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes twinkle {
+  0%,100% { opacity: 0.8; transform: scale(1); }
+  50% { opacity: 0.2; transform: scale(0.5); }
+}
+@keyframes float {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-25px) rotate(180deg); }
+  100% { transform: translateY(0px) rotate(360deg); }
+}
+
+/* ==========================
+   MOBILE RESPONSIVE
+========================== */
+@media (max-width: 768px) {
+  .hero-content h1 { font-size: 2rem; }
+  .hero-content p { font-size: 1rem; }
+  .hero-btn { padding: 12px 24px; font-size: 1rem; }
+}
+
 
 /* ==========================
    PRODUCT GRID
@@ -206,20 +285,54 @@ body {
 ========================== */
 .about-section {
   background: #fff;
-  padding: 60px 50px;
+  padding: 60px 30px; /* slightly smaller horizontal padding for mobile-friendliness */
   text-align: center;
-  line-height: 1.8rem;
+  line-height: 1.9; /* better readability */
   color: #444;
   border-radius: 20px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.08);
   margin: 60px 0;
   animation: fadeIn 2s ease-in;
 }
+
 .about-section h2 {
   color: #d4a017;
+  font-size: 2.5rem;
+  margin-bottom: 25px; /* spacing between title and paragraph */
+  line-height: 1.2;
 }
+
 .about-section p {
-  color: #444;
+  color: #555;
+  font-size: 1.1rem;
+  max-width: 700px; /* keeps paragraph readable on large screens */
+  margin: 0 auto;   /* centers paragraph */
+  line-height: 1.8; /* smooth line spacing */
+}
+
+/* Highlight key words */
+.about-section .highlight {
+  color: #d46a6a; /* soft pinkish tone */
+  font-weight: 600;
+}
+
+/* ==========================
+   MOBILE RESPONSIVE
+========================== */
+@media (max-width: 768px) {
+  .about-section {
+    padding: 40px 20px;
+  }
+
+  .about-section h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+
+  .about-section p {
+    font-size: 1rem;
+    line-height: 1.7;
+  }
 }
 
 /* ==========================
@@ -248,35 +361,48 @@ body {
 }
 
 /* ==========================
-   FLOATING SOCIAL BUTTONS
+   FOOTER SOCIAL ICONS COLORS
 ========================== */
-.floating-social {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  z-index: 1000;
-}
-.floating-social a {
-  display: flex;
+.footer .social-icons a {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 50px;
-  height: 50px;
-  background: #d4a017; 
-  color: white;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  font-size: 1.5rem;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+  color: white;
+  font-size: 1.2rem;
   transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
 }
-.floating-social a:hover {
-  transform: translateY(-5px) scale(1.1);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-  background: #b38710;
+
+/* Brand Colors */
+.footer .social-icons a[aria-label="WhatsApp"] {
+  background-color: #25D366;
 }
+
+.footer .social-icons a[aria-label="Facebook"] {
+  background-color: #1877F2;
+}
+
+.footer .social-icons a[aria-label="Instagram"] {
+  background: radial-gradient(circle at 30% 30%, #fdf497, #fd5949, #d6249f, #285AEB);
+}
+
+/* Hover effect */
+.footer .social-icons a:hover {
+  transform: translateY(-3px) scale(1.1);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+}
+
+/* Mobile responsive footer icons */
+@media (max-width: 768px) {
+  .footer .social-icons a {
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
+  }
+}
+
 
 /* ==========================
    QR CODE
@@ -581,4 +707,538 @@ body.dark {
 .header {
   z-index: 1000; /* less than 9999 of cart */
 }
+
+/* HEADER */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background: #fff;
+  position: relative;
+}
+
+/* LOGO */
+.logo {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* HAMBURGER */
+.hamburger {
+  width: 28px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.hamburger span {
+  width: 26px;
+  height: 3px;
+  background: var(--text);
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+
+/* NAV MENU */
+.nav {
+  position: absolute;
+  top: 70px;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  display: none;
+  flex-direction: column;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.nav a {
+  padding: 14px;
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  border-bottom: 1px solid #eee;
+}
+
+/* SHOW MENU */
+.nav.show {
+  display: flex;
+}
+
+/* DESKTOP VIEW */
+
+
+/* HEADER LAYOUT */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  background: #fff;
+  position: relative;
+}
+
+/* RIGHT SIDE */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* HAMBURGER BUTTON */
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.hamburger span {
+  width: 26px;
+  height: 3px;
+  background: var(--text);
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+
+/* NAV MENU (MOBILE) */
+.nav {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 100%;
+  background: #fff;
+  display: none;
+  flex-direction: column;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.nav a {
+  padding: 14px;
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  border-bottom: 1px solid #eee;
+}
+
+/* SHOW MENU */
+.nav.show {
+  display: flex;
+}
+
+/* DESKTOP VIEW */
+
+
+/* ==========================
+   CLEAN MOBILE NAV FIX
+========================== */
+
+/* Ensure header layout */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+/* HAMBURGER (hidden on desktop) */
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.hamburger span {
+  width: 26px;
+  height: 3px;
+  background: var(--text);
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+
+/* MOBILE NAV */
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+
+  .nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    display: none;
+    flex-direction: column;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    z-index: 999;
+  }
+
+  .nav a {
+    padding: 16px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .nav.show {
+    display: flex;
+  }
+}
+
+/* DESKTOP NAV */
+@media (min-width: 769px) {
+  .nav {
+    display: flex !important;
+    position: static;
+    flex-direction: row;
+    background: none;
+    box-shadow: none;
+  }
+
+  .hamburger {
+    display: none;
+  }
+}
+
+@media (min-width: 1200px) {
+  .hamburger {
+    display: none;
+  }
+
+  .nav {
+    position: static;
+    display: flex !important;
+    flex-direction: row;
+    gap: 20px;
+    box-shadow: none;
+    width: auto;
+  }
+
+  .nav a {
+    border: none;
+    padding: 0;
+  }
+}
+
+/* 🔥 HAMBURGER ANIMATION */
+.hamburger span {
+  transition: all 0.3s ease;
+}
+
+/* When menu is open */
+.hamburger.active span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+body.dark .hamburger span {
+  background: var(--text);
+}
+
+.hamburger:hover span {
+  opacity: 0.8;
+}
+
+/* NAV MENU (MOBILE ANIMATED) */
+.nav {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 100%;
+  background: var(--card);
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-10px);
+
+  transition:
+    max-height 0.4s ease,
+    opacity 0.3s ease,
+    transform 0.3s ease;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  z-index: 999;
+}
+
+/* WHEN MENU IS OPEN */
+.nav.show {
+  max-height: 300px; /* enough for all links */
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* NAV LINKS */
+.nav a {
+  padding: 16px;
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 500;
+  border-bottom: 1px solid var(--border);
+}
+
+/* REMOVE BORDER ON LAST ITEM */
+.nav a:last-child {
+  border-bottom: none;
+}
+
+@media (min-width: 768px) {
+  .nav {
+    position: static;
+    max-height: none;
+    opacity: 1;
+    transform: none;
+    flex-direction: row;
+    gap: 20px;
+    box-shadow: none;
+    width: auto;
+  }
+
+  .nav a {
+    border: none;
+    padding: 0;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ==========================
+   ABOUT SECTION
+========================== */
+.about-section {
+  background: #fff;
+  padding: 60px 30px;
+  text-align: center;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  margin: 60px 0;
+  animation: fadeIn 2s ease-in;
+}
+
+.about-section h2 {
+  color: #d4a017;
+  font-size: 2.5rem;
+  margin-bottom: 25px;
+  line-height: 1.2;
+}
+
+.about-section p {
+  color: #555;
+  font-size: 1.1rem;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+/* Highlighted phrases */
+.about-section .highlight {
+  color: #d46a6a;
+  font-weight: 600;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.about-section .highlight.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==========================
+   SOCIAL ICONS
+========================== */
+.social-icons {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.social-icons a {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: white;
+  font-size: 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+.social-icons a:hover {
+  transform: scale(1.1);
+}
+
+/* Brand Colors */
+.social-icons a[aria-label="WhatsApp"] {
+  background-color: #25D366;
+}
+
+.social-icons a[aria-label="Facebook"] {
+  background-color: #1877F2;
+}
+
+.social-icons a[aria-label="Instagram"] {
+  background: radial-gradient(circle at 30% 30%, #fdf497, #fd5949, #d6249f, #285AEB);
+}
+
+/* ==========================
+   MOBILE RESPONSIVE
+========================== */
+@media (max-width: 768px) {
+  .about-section {
+    padding: 40px 20px;
+  }
+
+  .about-section h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+
+  .about-section p {
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  .social-icons a {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+}
+
+/* ==========================
+   FLOATING SOCIAL BUTTONS
+========================== */
+.floating-social {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  z-index: 1000;
+  transition: opacity 0.4s ease;
+}
+
+.floating-social a {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: white;
+  font-size: 1.5rem;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+  transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+  animation: floatIcons 4s ease-in-out infinite;
+}
+
+/* Brand Colors */
+.floating-social a[aria-label="WhatsApp"] {
+  background-color: #25D366;
+}
+
+.floating-social a[aria-label="Facebook"] {
+  background-color: #1877F2;
+}
+
+.floating-social a[aria-label="Instagram"] {
+  background: radial-gradient(circle at 30% 30%, #fdf497, #fd5949, #d6249f, #285AEB);
+}
+
+/* Hover effect */
+.floating-social a:hover {
+  transform: translateY(-5px) scale(1.1);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+/* Floating animation keyframes */
+@keyframes floatIcons {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0); }
+}
+
+/* ==========================
+   MOBILE RESPONSIVE
+========================== */
+@media (max-width: 768px) {
+  .floating-social a {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+
+  .floating-social {
+    gap: 12px;
+    bottom: 15px;
+    right: 15px;
+  }
+}
+
+/* Highlighted words animation */
+.about-section .highlight {
+  opacity: 0;
+  transform: translateY(15px);
+  display: inline-block;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.about-section .highlight.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger effect using transition delay */
+.about-section .highlight:nth-child(1).visible { transition-delay: 0.1s; }
+.about-section .highlight:nth-child(2).visible { transition-delay: 0.25s; }
+.about-section .highlight:nth-child(3).visible { transition-delay: 0.4s; }
+.about-section .highlight:nth-child(4).visible { transition-delay: 0.55s; }
+/* Add more nth-child if you have more highlights */
+
+/* Footer icons animation */
+.footer .social-icons a {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.footer .social-icons a.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger for footer icons */
+.footer .social-icons a:nth-child(1).visible { transition-delay: 0.1s; }
+.footer .social-icons a:nth-child(2).visible { transition-delay: 0.25s; }
+.footer .social-icons a:nth-child(3).visible { transition-delay: 0.4s; }
+
 
