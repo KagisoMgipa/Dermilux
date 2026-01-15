@@ -1241,4 +1241,85 @@ html {
 .footer .social-icons a:nth-child(2).visible { transition-delay: 0.25s; }
 .footer .social-icons a:nth-child(3).visible { transition-delay: 0.4s; }
 
+/* ==========================
+   DARK MODE – FULL SECTIONS
+========================== */
+
+body.dark {
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* ---------- HEADER ---------- */
+body.dark .header {
+  background: var(--card);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+}
+
+body.dark .nav {
+  background: var(--card);
+}
+
+body.dark .nav a {
+  color: var(--text);
+}
+
+/* ---------- HERO (keep image, darken overlay) ---------- */
+body.dark .hero {
+  background:
+    linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+    url("images/38ec2add-a0c9-4b99-87cd-3e60af50df4a.jpg") center/cover no-repeat;
+}
+
+/* ---------- PRODUCTS SECTION ---------- */
+body.dark .products-section {
+  background: var(--secondary);
+}
+
+body.dark .product-card {
+  background: var(--card);
+  color: var(--text);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+}
+
+body.dark .product-card h3 {
+  color: var(--primary);
+}
+
+body.dark .desc {
+  color: #cbd5e1;
+}
+
+body.dark .price {
+  color: var(--primary);
+}
+
+/* ---------- ABOUT SECTION ---------- */
+body.dark .about-section {
+  background: var(--card);
+  color: var(--text);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+}
+
+body.dark .about-section p {
+  color: #d1d5db;
+}
+
+body.dark .section-title {
+  color: var(--primary);
+}
+
+/* Highlighted words in dark mode */
+body.dark .highlight {
+  color: var(--primary);
+  background: rgba(250, 204, 21, 0.15);
+  padding: 0 6px;
+  border-radius: 6px;
+}
+
+body.dark .dark-toggle {
+  background: #020617;
+  color: #facc15;
+}
+
 
