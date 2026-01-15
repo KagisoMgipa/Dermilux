@@ -313,3 +313,37 @@ body {
     font-size: 1.6rem;
   }
 }
+
+/* ==========================
+   CHECKOUT – DARK MODE FIX
+========================== */
+body.dark {
+  background: #020617;
+  color: #e5e7eb;
+}
+
+body.dark .checkout-container {
+  background: #020617;
+}
+
+body.dark .checkout-container * {
+  color: #e5e7eb;
+  border-color: #1e293b;
+}
+
+body.dark .checkout-box,
+body.dark .summary-box,
+body.dark .payment-box,
+body.dark .address-box {
+  background: #020617;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
+
+/* Inputs */
+body.dark input,
+body.dark textarea,
+body.dark select {
+  background: #020617;
+  color: #e5e7eb;
+  border: 1px solid #1e293b;
+}

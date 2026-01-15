@@ -205,3 +205,35 @@ body {
   position: relative;
   z-index: 10; /* brings button above sparkles */
 }
+
+/* ==========================
+   CART – DARK MODE FIX
+========================== */
+body.dark {
+  background: #020617;
+  color: #e5e7eb;
+}
+
+body.dark .cart-container {
+  background: #020617;
+}
+
+body.dark .cart-container * {
+  color: #e5e7eb;
+  border-color: #1e293b;
+}
+
+body.dark .cart-item,
+body.dark .cart-summary,
+body.dark .cart-box {
+  background: #020617;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
+
+/* Inputs */
+body.dark input,
+body.dark select {
+  background: #020617;
+  color: #e5e7eb;
+  border: 1px solid #1e293b;
+}

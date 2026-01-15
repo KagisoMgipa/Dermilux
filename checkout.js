@@ -56,3 +56,32 @@ payfastForm.addEventListener("submit", (e) => {
     JSON.stringify({ name, email, address })
   );
 });
+
+// ==========================
+// GLOBAL DARK MODE HANDLER
+// ==========================
+document.addEventListener("DOMContentLoaded", () => {
+  const toggle = document.getElementById("darkModeToggle");
+  const savedTheme = localStorage.getItem("theme");
+
+  // Apply saved theme on load
+  if (savedTheme === "dark") {
+    document.body.classList.add("dark");
+    if (toggle) toggle.textContent = "☀️";
+  } else {
+    document.body.classList.remove("dark");
+    if (toggle) toggle.textContent = "🌙";
+  }
+
+  // Toggle theme
+  if (toggle) {
+    toggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+
+      const isDark = document.body.classList.contains("dark");
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+
+      toggle.textContent = isDark ? "☀️" : "🌙";
+    });
+  }
+});
